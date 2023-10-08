@@ -1,21 +1,21 @@
-/* Profile Object */
+// Profile Object //
 const myProfile = {
   name: "Juanita Pérez",
   photo: "images/placeholder.png",
   favoriteFoods: [
     "Pasta",
-    "Helado",
-    "Verduras",
+    "Ice Cream",
+    "Vegetables",
   ],
   hobbies: [
-    "Leer",
-    "Cocinar",
-    "Jardinear",
+    "Reading",
+    "Cooking",
+    "Gardening",
   ],
   placesLived: [],
 };
 
-/* Populate Profile Object with placesLived objects */
+// Populate Profile Object with placesLived objects //
 myProfile.placesLived.push(
   {
     place: "Rancagua, Chile",
@@ -27,31 +27,31 @@ myProfile.placesLived.push(
   }
 );
 
-/* DOM Manipulation - Output */
+// DOM Manipulation - Output //
 
-/* Name */
+// Name //
 document.querySelector("#name").textContent = myProfile.name;
 
-/* Photo with attributes */
+// Photo with attributes //
 const imageElement = document.querySelector("img");
 imageElement.setAttribute("src", myProfile.photo);
 imageElement.setAttribute("alt", `Profile of ${myProfile.name}`);
 
-/* Favorite Foods List */
+// Favorite Foods List //
 myProfile.favoriteFoods.forEach((food) => {
   let li = document.createElement("li");
   li.textContent = food;
   document.querySelector("#favorite-foods").appendChild(li);
 });
 
-/* Hobbies List */
+// Hobbies List //
 myProfile.hobbies.forEach((hobby) => {
   let li = document.createElement("li");
   li.textContent = hobby;
   document.querySelector("#hobbies").appendChild(li);
 });
 
-/* Places Lived DataList */
+// Places Lived DataList //
 myProfile.placesLived.forEach((place) => {
   let dt = document.createElement("dt");
   let dd = document.createElement("dd");
