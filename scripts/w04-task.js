@@ -1,5 +1,5 @@
 /* Profile Object */
-const myProfile = {
+let myProfile = {
   name: "Juanita Pérez",
   photo: "images/placeholder.png",
   favoriteFoods: [
@@ -22,7 +22,7 @@ myProfile.placesLived.push(
     length: "25 years",
   },
   {
-    place: "Argentina",
+    place: "Tucuman, Argentina",
     length: "15 years",
   }
 );
