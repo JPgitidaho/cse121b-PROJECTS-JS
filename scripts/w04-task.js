@@ -55,6 +55,12 @@ myProfile.hobbies.forEach((hobby) => {
 myProfile.placesLived.forEach((place) => {
   let dt = document.createElement("dt");
   let dd = document.createElement("dd");
+
+    // make a element span  FontAwesome
+  let iconElement = document.createElement("span");
+  iconElement.classList.add("fas", "fa-home"); 
+  dt.appendChild(iconElement);
+
   dt.textContent = place.place;
   dd.textContent = place.length;
 
