@@ -10,11 +10,11 @@ let myProfile = {
 /* Populate Profile Object with placesLived objects */
 myProfile.placesLived.push(
   {
-    place: "\u1F3E0  <strong>Rancagua, Chile</strong>",
+    place: "🏠 <strong>Rancagua, Chile</strong>",
     length: "25 years",
   },
   {
-    place: "\u1F3E0  <strong>Tucuman, Argentina</strong>",
+    place: "🏠 <strong>Tucuman, Argentina</strong>",
     length: "15 years",
   }
 );
