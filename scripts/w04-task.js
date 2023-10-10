@@ -2,27 +2,19 @@
 let myProfile = {
   name: "Juanita Pérez",
   photo: "images/placeholder.png",
-  favoriteFoods: [
-    "Pasta",
-    "Ice Cream",
-    "Vegetables",
-  ],
-  hobbies: [
-    "Reading",
-    "Cooking",
-    "Gardening",
-  ],
+  favoriteFoods: ["Pasta", "Ice Cream", "Vegetables"],
+  hobbies: ["Reading", "Cooking", "Gardening"],
   placesLived: [],
 };
 
 /* Populate Profile Object with placesLived objects */
 myProfile.placesLived.push(
   {
-    place: "🏠 Rancagua, Chile",
+    place: "🏠 <strong>Rancagua, Chile</strong>",
     length: "25 years",
   },
   {
-    place: "🏠 Tucuman, Argentina",
+    place: "🏠 <strong>Tucuman, Argentina</strong>",
     length: "15 years",
   }
 );
@@ -55,8 +47,9 @@ myProfile.hobbies.forEach((hobby) => {
 myProfile.placesLived.forEach((place) => {
   let dt = document.createElement("dt");
   let dd = document.createElement("dd");
-  
-  dt.textContent = place.place;
+
+  // Use innerHTML to render HTML tags
+  dt.innerHTML = place.place;
   dd.textContent = place.length;
 
   document.querySelector("#places-lived").appendChild(dt);
