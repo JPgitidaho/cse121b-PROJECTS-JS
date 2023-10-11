@@ -46,7 +46,8 @@ appendChild(h3);
 const getTemples = async () => {
     try {
 
-        const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
+        const response = await fetch("D:/BYU 3 SEMESTRE/cse121b/templeList.json");
+        
 
     
 
