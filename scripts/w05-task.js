@@ -46,12 +46,9 @@ appendChild(h3);
 const getTemples = async () => {
     try {
 
-        const response = await fetch("D:/BYU 3 SEMESTRE/cse121b/templeList.json");
+        const response = await fetch("templeList.json");
         
 
-    
-
-   
 if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
@@ -59,8 +56,6 @@ if (!response.ok) {
     const data = await response.json();
 
     templeList = data;
-
-
 
 displayTemples(templeList);
   } catch (error) {
@@ -116,7 +111,5 @@ const reset = () => {
   sortBy(templeList);
   });
   
-  /* Initialize by fetching temple data */
-  
-  get
-  getTemples();
+/* Initialize by loading the local JSON file */
+loadJSONFile();
