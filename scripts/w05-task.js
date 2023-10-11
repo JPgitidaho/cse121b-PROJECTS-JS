@@ -1,115 +1,89 @@
-/* W05: Programming Tasks */
-
 /* Declare and initialize global variables */
 const templesElement = document.querySelector("#temples");
-
-let templeList = []; 
-
-
+let templeList = [];
 
 /* async displayTemples Function */
-
-
-const displayTemples = (templeList) => {
-
+const displayTemples = (temples) => {
   // Clear existing output
   templesElement.innerHTML = '';
+
+  // Create a wrapper for the temple cards to control layout
+  const templeWrapper = document.createElement('div');
+  templeWrapper.classList.add('temple-wrapper');
 
   // Process each temple and create HTML elements
   temples.forEach((temple) => {
     const article = document.createElement('article');
     
-   
-const h3 = document.createElement('h3');
+    const h3 = document.createElement('h3');
     h3.textContent = temple.templeName;
     
-   
-const img = document.createElement('img');
+    const img = document.createElement('img');
     img.src = temple.imageUrl;
     img.alt = temple.templeName;
     img.setAttribute('location', temple.location);
 
     // Append elements to the article
-    article.
-   
-appendChild(h3);
+    article.appendChild(h3);
     article.appendChild(img);
 
-    // Append the article to the global container
-    templesElement.appendChild(article);
+    // Append the article to the temple wrapper
+    templeWrapper.appendChild(article);
   });
+
+  // Append the temple wrapper to the global container
+  templesElement.appendChild(templeWrapper);
 };
 
-
-/* async getTemples Function using fetch()*/
-
+/* async getTemples Function using fetch() */
 const getTemples = async () => {
-    try {
+  try {
+    const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
 
-        const response = await fetch("templeList.json");
-        
-
-if (!response.ok) {
+    if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
 
     const data = await response.json();
 
     templeList = data;
-
-displayTemples(templeList);
+    displayTemples(templeList);
   } catch (error) {
     console.error("Error fetching temple data:", error);
   }
 };
-    
+
 /* reset Function */
 const reset = () => {
-    templesElement.
-  innerHTML = '';
-  };
-  
-  /* sortBy Function */
-  const sortBy = (temples) => {
-    // Clear existing output
-    reset();
-  
-    // Get the selected value from the dropdown menu
-    const filterValue = document.getElementById('sortBy').value;
-  
-    // Filter and display temples based on the selected option
-    switch (filterValue) {
-      case 'utah':
-        displayTemples(temples.filter((temple) => temple.location.includes("Utah")));
-        break;
-      
-     
-  case 'nonutah':
-        displayTemples(temples.filter((temple) => !temple.location.includes("Utah")));
-        break;
-      case 'older':
-        displayTemples(temples.filter((temple) => new Date(temple.dedicated) < new Date(1950, 0, 1)));
-        
-       
-  break;
-      case 'all':
-      default:
-        displayTemples(temples);
-        break;
-    }
-  };
-  
-  /* Event Listener */
-  const filterSelect = document.getElementById('filter');
-  filterSelect.
-  filterSelect
-  addEventListener('change', () => {
-    
-    sortBy
-  
-   
+  templesElement.innerHTML = '';
+};
+
+/* Function to sort temples */
+const sortBy = (temples) => {
+  reset();
+  const filterValue = document.getElementById('sortBy').value;
+
+  switch (filterValue) {
+    case 'utah':
+      displayTemples(temples.filter((temple) => temple.location.includes("Utah")));
+      break;
+    case 'notutah':
+      displayTemples(temples.filter((temple) => !temple.location.includes("Utah")));
+      break;
+    case 'older':
+      displayTemples(temples.filter((temple) => new Date(temple.dedicated) < new Date(1950, 0, 1)));
+      break;
+    case 'all':
+    default:
+      displayTemples(temples);
+      break;
+  }
+};
+
+/* Event Listener for the Sort By dropdown */
+document.getElementById("sortBy").addEventListener("change", () => {
   sortBy(templeList);
-  });
-  
-/* Initialize by loading the local JSON file */
-loadJSONFile();
+});
+
+/* Initialize by fetching temple data */
+getTemples();
