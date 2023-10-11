@@ -70,7 +70,6 @@ displayTemples(templeList);
 /* reset Function */
 const reset = () => {
     templesElement.
-    templesList
   innerHTML = '';
   };
   
@@ -80,7 +79,7 @@ const reset = () => {
     reset();
   
     // Get the selected value from the dropdown menu
-    const filterValue = document.getElementById('filter').value;
+    const filterValue = document.getElementById('sortBy').value;
   
     // Filter and display temples based on the selected option
     switch (filterValue) {
