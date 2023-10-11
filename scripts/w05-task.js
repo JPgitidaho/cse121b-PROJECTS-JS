@@ -70,7 +70,7 @@ displayTemples(templeList);
 /* reset Function */
 const reset = () => {
     templesElement.
-    temples
+    templesList
   innerHTML = '';
   };
   
