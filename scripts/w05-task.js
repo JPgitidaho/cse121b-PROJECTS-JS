@@ -59,9 +59,6 @@ if (!response.ok) {
 
     templeList = data;
 
-    
-
-    templeList =
 
 
 displayTemples(templeList);
@@ -72,42 +69,54 @@ displayTemples(templeList);
     
 /* reset Function */
 const reset = () => {
-    templesElement.innerHTML = '';
+    templesElement.
+    temples
+  innerHTML = '';
   };
-
-/* sortBy Function */
-const sortBy = (temples) => {
+  
+  /* sortBy Function */
+  const sortBy = (temples) => {
     // Clear existing output
     reset();
-
-
-
-/* Event Listener */
-const filterSelect = document.getElementById('filter');
-filterSelect.
-filterSelect
-addEventListener('change', () => {
-  sortBy(templeList);
-});
-
-// Call the function to fetch temple data when the page loads
-getTemples();
-
-switch (filterValue) {
-    case 'utah':
-      displayTemples(temples.filter((temple) => temple.location.includes("Utah")));
-      break;
-    case 'nonutah':
-      displayTemples(temples.filter((temple) => !temple.location.includes("Utah")));
-      break;
-    case 'older':
+  
+    // Get the selected value from the dropdown menu
+    const filterValue = document.getElementById('filter').value;
+  
+    // Filter and display temples based on the selected option
+    switch (filterValue) {
+      case 'utah':
+        displayTemples(temples.filter((temple) => temple.location.includes("Utah")));
+        break;
       
-      displayTemp
-displayTemples(temples.filter((temple) => new Date(temple.dedicated) < new Date(1950, 0, 1)));
-      break;
-    case 'all':
-    default:
-      displayTemples(temples);
-      break;
-  }
-};
+     
+  case 'nonutah':
+        displayTemples(temples.filter((temple) => !temple.location.includes("Utah")));
+        break;
+      case 'older':
+        displayTemples(temples.filter((temple) => new Date(temple.dedicated) < new Date(1950, 0, 1)));
+        
+       
+  break;
+      case 'all':
+      default:
+        displayTemples(temples);
+        break;
+    }
+  };
+  
+  /* Event Listener */
+  const filterSelect = document.getElementById('filter');
+  filterSelect.
+  filterSelect
+  addEventListener('change', () => {
+    
+    sortBy
+  
+   
+  sortBy(templeList);
+  });
+  
+  /* Initialize by fetching temple data */
+  
+  get
+  getTemples();
