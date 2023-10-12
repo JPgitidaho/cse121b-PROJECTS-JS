@@ -2,58 +2,57 @@
 const templesElement = document.querySelector("#temples");
 let templeList = [];
 
-/* async displayTemples Function */
-function displayTemples(templeList) {
-  const templeDiv = document.querySelector("#temples");
-  templeDiv.innerHTML = ''; // Clear the temple container
+/* Function: displayTemples() */
+const displayTemples = (temples) => {
+  templesElement.innerHTML = ''; // Clear the temple container
 
-  const templeWrapper = document.createElement('div');
-  templeWrapper.classList.add('temple-wrapper');
+  temples.forEach((temple) => {
+    const article = document.createElement('article');
+    article.classList.add('temple-card');
 
-  templeList.forEach((temple, index) => {
-    const templeItem = document.createElement('div');
-    templeItem.classList.add('temple-item');
+    // Create a div for the temple image and styling
+    const imageDiv = document.createElement('div');
+    imageDiv.classList.add('temple-image');
 
     const img = document.createElement('img');
     img.src = temple.imageUrl;
-    img.alt = temple.templeName;
+    img.alt = temple.location;
+    imageDiv.appendChild(img);
 
-    // Add data attributes for future reference
-    img.setAttribute('data-location', temple.location);
-    img.setAttribute('data-dedicated', temple.dedicated);
-    img.setAttribute('data-area', temple.area);
+    article.appendChild(imageDiv);
 
-    templeItem.appendChild(img);
+    // Create a div for temple information
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('temple-info');
 
-    const templeNameH3 = document.createElement("h3");
-    templeNameH3.innerText = temple.templeName;
-    templeItem.appendChild(templeNameH3);
+    const h3 = document.createElement('h3');
+    h3.innerText = temple.templeName;
+    h3.style.fontWeight = 'bold'; // Make templeName bold
+    h3.style.fontSize = '20px'; // Increase font size for templeName
+    infoDiv.appendChild(h3);
 
-    const locationP = document.createElement("p");
+    const locationP = document.createElement('p');
     locationP.innerText = "Location: " + temple.location;
-    templeItem.appendChild(locationP);
+    infoDiv.appendChild(locationP);
 
-    const dedicatedP = document.createElement("p");
+    const dedicatedP = document.createElement('p');
     dedicatedP.innerText = "Dedicated: " + temple.dedicated;
-    templeItem.appendChild(dedicatedP);
+    infoDiv.appendChild(dedicatedP);
 
-    const areaP = document.createElement("p");
+    const areaP = document.createElement('p');
     areaP.innerText = "Area: " + temple.area + " square feet";
-    templeItem.appendChild(areaP);
+    infoDiv.appendChild(areaP);
 
-    templeWrapper.appendChild(templeItem);
+    article.appendChild(infoDiv);
 
-    // Insert a line break after every third item
-    if ((index + 1) % 3 === 0) {
-      templeWrapper.appendChild(document.createElement('br'));
-    }
+    templesElement.appendChild(article);
   });
+};
 
-  templeDiv.appendChild(templeWrapper);
-}
 
-/* async getTempleData Function using fetch() */
-async function getTempleData() {
+
+/* Function: getTemples() */
+const getTemples = async () => {
   try {
     const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
     templeList = await response.json();
@@ -66,14 +65,14 @@ async function getTempleData() {
   } catch (error) {
     console.error("Error fetching temple data:", error);
   }
-}
+};
 
-/* reset Function */
+/* Function: reset() */
 const reset = () => {
   templesElement.innerHTML = ''; // Clear the temple container
 };
 
-/* Function to sort temples */
+/* Function: sortBy() */
 const sortBy = (temples) => {
   reset();
   const filterValue = document.getElementById('sortBy').value;
@@ -93,7 +92,7 @@ const sortBy = (temples) => {
       displayTemples(temples);
       break;
   }
-}
+};
 
 /* Event Listener for the Sort By dropdown */
 document.getElementById("sortBy").addEventListener("change", () => {
@@ -101,4 +100,4 @@ document.getElementById("sortBy").addEventListener("change", () => {
 });
 
 /* Initialize by fetching temple data */
-getTempleData();
+getTemples();

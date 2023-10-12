@@ -156,11 +156,46 @@ footer {
 
 }
 
+/*  task 05*/
 
+/* CSS for Grid Layout */
+#temples {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    justify-items: center;
+  }
+  
+  /* Style for each temple card */
+  .temple-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 50px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px #aaa;
+    text-align: center;
+  }
+  
+  /* Style for temple images */
+  .temple-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
 
-
-
-
-
-
+/* Center the h1 element within the second grid cell */
+#gridly {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "title";
+    justify-items: center;
+    align-items: center;
+  }
+  
+  h1 {
+    grid-area: title;
+    text-align: center;
+  }
+     
 
