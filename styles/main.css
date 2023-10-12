@@ -158,22 +158,6 @@ footer {
 
 
 
-/* CSS */
-.temple-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .temple-item {
-    width: 30%; /* Ajusta el ancho según tu preferencia */
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .temple-item img {
-    max-width: 100%; /* Para que todas las imágenes tengan el mismo tamaño */
-  }
 
 
 
