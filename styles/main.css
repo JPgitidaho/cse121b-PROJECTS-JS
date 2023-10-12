@@ -173,14 +173,21 @@ footer {
     border: 1px solid #ccc;
     padding: 50px;
     background-color: #f9f9f9;
-    box-shadow: 0 0 15px #8f98d1;
+    box-shadow: 0 0 15px #9da4cc;
     text-align: center;
   }
   
   /* Style for temple images */
-  .temple-card img {
+.temple-card img {
     max-width: 100%;
-    height: auto;
+    height: 300px;
+    transition: transform 0.3s, box-shadow 0.3s; /* Add smooth transitions */
+  }
+  
+  /* Hover effect for the temple image */
+  .temple-card img:hover {
+    transform: scale(1.05); /* Scale up the image on hover */
+    box-shadow: 0 0 20px rgba(4, 30, 81, 0.6); /* Increase the shadow on hover */
   }
   
 /* Center the h1 element within the second grid cell */
@@ -195,6 +202,7 @@ footer {
   h1 {
     grid-area: title;
     text-align: center;
+    box-shadow: 0 0 10px rgba(4, 30, 81, 0.2); /* Add a shadow to the images */
   }
      
 
