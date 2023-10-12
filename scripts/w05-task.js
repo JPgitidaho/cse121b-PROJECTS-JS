@@ -52,14 +52,13 @@ function displayTemples(templeList) {
   templeDiv.appendChild(templeWrapper);
 }
 
-
 /* async getTempleData Function using fetch() */
 async function getTempleData() {
   try {
     const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
     templeList = await response.json();
     if (response.ok) {
-      displayTemples(templeList); 
+      displayTemples(templeList);
     } else {
       console.log("DATA COULD NOT BE FETCHED");
     }
@@ -103,10 +102,3 @@ document.getElementById("sortBy").addEventListener("change", () => {
 
 /* Initialize by fetching temple data */
 getTempleData();
-
-// Center the "Sort By" dropdown using CSS styles
-const sortByDropdown = document.getElementById("sortBy");
-
-
-
-
