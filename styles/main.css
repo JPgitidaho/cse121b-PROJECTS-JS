@@ -187,7 +187,7 @@ footer {
   /* Hover effect for the temple image */
   .temple-card img:hover {
     transform: scale(1.05); /* Scale up the image on hover */
-    box-shadow: 0 0 20px rgba(4, 30, 81, 0.6); /* Increase the shadow on hover */
+    box-shadow: 0 0 20px rgba(30, 66, 137, 0.6); /* Increase the shadow on hover */
   }
   
 /* Center the h1 element within the second grid cell */
