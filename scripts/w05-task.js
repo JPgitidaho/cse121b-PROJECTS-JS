@@ -7,25 +7,12 @@ function displayTemples(templeList) {
   const templeDiv = document.querySelector("#temples");
   templeDiv.innerHTML = ''; // Clear the temple container
 
-  templeList.forEach((temple) => {
-    const templeWrapper = document.createElement('div');
-    templeWrapper.classList.add('temple-wrapper');
+  const templeWrapper = document.createElement('div');
+  templeWrapper.classList.add('temple-wrapper');
 
-    const templeNameH3 = document.createElement("h3");
-    templeNameH3.innerText = temple.templeName;
-    templeWrapper.appendChild(templeNameH3);
-
-    const locationP = document.createElement("p");
-    locationP.innerText = "Location: " + temple.location;
-    templeWrapper.appendChild(locationP);
-
-    const dedicatedP = document.createElement("p");
-    dedicatedP.innerText = "Dedicated: " + temple.dedicated;
-    templeWrapper.appendChild(dedicatedP);
-
-    const areaP = document.createElement("p");
-    areaP.innerText = "Area: " + temple.area + " square feet";
-    templeWrapper.appendChild(areaP);
+  templeList.forEach((temple, index) => {
+    const templeItem = document.createElement('div');
+    templeItem.classList.add('temple-item');
 
     const img = document.createElement('img');
     img.src = temple.imageUrl;
@@ -36,11 +23,36 @@ function displayTemples(templeList) {
     img.setAttribute('data-dedicated', temple.dedicated);
     img.setAttribute('data-area', temple.area);
 
-    // Append elements to the temple container
-    templeWrapper.appendChild(img);
-    templeDiv.appendChild(templeWrapper);
+    templeItem.appendChild(img);
+
+    const templeNameH3 = document.createElement("h3");
+    templeNameH3.innerText = temple.templeName;
+    templeItem.appendChild(templeNameH3);
+
+    const locationP = document.createElement("p");
+    locationP.innerText = "Location: " + temple.location;
+    templeItem.appendChild(locationP);
+
+    const dedicatedP = document.createElement("p");
+    dedicatedP.innerText = "Dedicated: " + temple.dedicated;
+    templeItem.appendChild(dedicatedP);
+
+    const areaP = document.createElement("p");
+    areaP.innerText = "Area: " + temple.area + " square feet";
+    templeItem.appendChild(areaP);
+
+    templeWrapper.appendChild(templeItem);
+
+    // Insert a line break after every third item
+    if ((index + 1) % 3 === 0) {
+      templeWrapper.appendChild(document.createElement('br'));
+    }
   });
+
+  templeDiv.appendChild(templeWrapper);
 }
+
+
 /* async getTempleData Function using fetch() */
 async function getTempleData() {
   try {
