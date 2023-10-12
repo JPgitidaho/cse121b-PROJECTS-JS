@@ -173,7 +173,7 @@ footer {
     border: 1px solid #ccc;
     padding: 50px;
     background-color: #f9f9f9;
-    box-shadow: 0 0 10px #aaa;
+    box-shadow: 0 0 15px #8f98d1;
     text-align: center;
   }
   
@@ -183,7 +183,6 @@ footer {
     height: auto;
   }
   
-
 /* Center the h1 element within the second grid cell */
 #gridly {
     display: grid;
