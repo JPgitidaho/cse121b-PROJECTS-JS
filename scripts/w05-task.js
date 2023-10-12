@@ -87,12 +87,16 @@ const sortBy = (temples) => {
     case 'older':
       displayTemples(temples.filter((temple) => new Date(temple.dedicated) < new Date(1950, 0, 1)));
       break;
+    case 'alphabetical':
+      displayTemples(temples.slice().sort((a, b) => a.templeName.localeCompare(b.templeName)));
+      break;
     case 'all':
     default:
       displayTemples(temples);
       break;
   }
-};
+}
+
 
 /* Event Listener for the Sort By dropdown */
 document.getElementById("sortBy").addEventListener("change", () => {
@@ -101,3 +105,18 @@ document.getElementById("sortBy").addEventListener("change", () => {
 
 /* Initialize by fetching temple data */
 getTemples();
+
+/* Function to add the "Alphabetical Order" option */
+function addAlphabeticalOption() {
+  const sortBySelect = document.getElementById('sortBy');
+
+  const alphabeticalOption = document.createElement('option');
+  alphabeticalOption.value = 'alphabetical';
+  alphabeticalOption.textContent = 'Alphabetical Order';
+
+  // Insert the option as the last item in the dropdown
+  sortBySelect.appendChild(alphabeticalOption);
+}
+
+// Call the function to add the "Alphabetical Order" option
+addAlphabeticalOption();
