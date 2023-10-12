@@ -161,8 +161,8 @@ footer {
 #temples {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* grid-gap: 10px; */
-    /* justify-items: center; */
+    grid-gap: 10px; 
+    justify-items: center; 
   }
   
   /* Style for each temple card */
