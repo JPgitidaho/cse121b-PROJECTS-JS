@@ -7,9 +7,30 @@
     <title>Visor de Datos de Gatos</title>
 </head>
 <body>
-    <h1>Visor de Datos de Gatos</h1>
-    <button id="loadImageButton">Cargar Imágenes de Gatos</button>
-    <div class="image-container" id="image-container"></div>
+    <h1>Visor de Gatos</h1>
+
+    <label for="breedSelect">Selecciona una raza de gato:</label>
+    <select id="breedSelect">
+       
+    </select>
+
+    <div id="image-container" class="image-container">
+    </div>
+    
+    <div id="pagination" class="pagination"></div>
+    <div id="breed-info-container">
+       
+    </div>
+    
+
+   
     <script src="script.js"></script>
+    
+    <footer>
+        &copy;<span id="year"></span> | Week 06-07- Project | CSE 121b
+    </footer>
+    <script>
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
 </body>
 </html>
