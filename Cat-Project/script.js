@@ -1,4 +1,4 @@
-// Función para cargar imágenes de gatos
+// Function to load cat images
 function loadCatImages(breedId) {
     const apiUrl = `https://api.thecatapi.com/v1/images/search?limit=6&breed_id=${breedId}`;
 
@@ -8,10 +8,10 @@ function loadCatImages(breedId) {
             const imageContainer = document.getElementById("image-container");
             imageContainer.innerHTML = "";
 
-            // Función para generar estrellas basadas en el nivel de una cualidad
+            // Function to generate stars based on the level of a trait
             function generateStars(level) {
                 const maxStars = 5;
-                const filledStars = level; // Puedes ajustar esto según el nivel
+                const filledStars = level; // You can adjust this based on the level
                 const emptyStars = maxStars - filledStars;
                 return "★".repeat(filledStars) + "☆".repeat(emptyStars);
             }
@@ -20,21 +20,21 @@ function loadCatImages(breedId) {
                 const catImage = data[index];
                 const imageUrl = catImage.url;
 
-                // Obtener información de la raza correspondiente
+                // Get information about the corresponding breed
                 const breedInfo = await fetch(`https://api.thecatapi.com/v1/breeds/${breedId}`).then(response => response.json());
 
-                // Crear una tarjeta HTML para la imagen con estrellas
+                // Create an HTML card for the image with stars
                 const card = document.createElement("div");
                 card.classList.add("image-card");
 
                 const image = document.createElement("img");
                 image.src = imageUrl;
-                image.alt = "Imagen de un gato";
+                image.alt = "Image of a cat";
                 image.classList.add("generated-image");
 
                 const title = document.createElement("h3");
 
-                // Construir cadenas de estrellas para cada cualidad
+                // Build star strings for each trait
                 const adaptabilityStars = generateStars(breedInfo.adaptability);
                 const affectionStars = generateStars(breedInfo.affection_level);
                 const childFriendlyStars = generateStars(breedInfo.child_friendly);
@@ -45,7 +45,7 @@ function loadCatImages(breedId) {
                 const intelligenceStars = generateStars(breedInfo.intelligence);
                 const sheddingStars = generateStars(breedInfo.shedding_level);
 
-                title.innerHTML = `Gato ${index + 1}<br>
+                title.innerHTML = `<br>
                 Adaptability: ${adaptabilityStars}<br>
                 Affection: ${affectionStars}<br>
                 Child Friendly: ${childFriendlyStars}<br>
@@ -67,15 +67,7 @@ function loadCatImages(breedId) {
         });
 }
 
-
-// Agrega un event listener para el botón que permite seleccionar la raza
-document.getElementById("breedSelect").addEventListener("change", () => {
-    const selectedBreedId = document.getElementById("breedSelect").value;
-    loadCatImages(selectedBreedId);
-    loadCatBreedInfo(selectedBreedId);
-});
-
-// Carga la lista de razas de gatos al cargar la página
+// Load the list of cat breeds when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = "https://api.thecatapi.com/v1/breeds";
     const breedSelect = document.getElementById("breedSelect");
@@ -89,8 +81,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 option.textContent = breed.name;
                 breedSelect.appendChild(option);
             });
+
+            // Automatically load images of the first breed in the list
+            const selectedBreedId = "";
+            loadCatImages(selectedBreedId);
         })
         .catch((error) => {
             console.error("Error fetching cat breeds: " + error.message);
         });
+});
+
+// Add an event listener for the button that allows selecting the breed
+document.getElementById("breedSelect").addEventListener("change", () => {
+    const selectedBreedId = document.getElementById("breedSelect").value;
+    loadCatImages(selectedBreedId);
 });

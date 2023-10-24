@@ -7,18 +7,11 @@ h1 {
     color: #333;
 }
 
-button {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #0056b3;
+/* Change the background color of the selection button */
+#breedSelect {
+    background-color: #e4e1ca; /* Change the background color to your preference */
+    color: #241f1f; /* Change the text color to your preference */
+    padding: 10px;
 }
 
 footer {
@@ -31,7 +24,7 @@ footer {
     bottom: 0;
 }
 
-/* Estilos para el contenedor de imágenes */
+/* Styles for the image container */
 .image-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
@@ -40,7 +33,7 @@ footer {
     margin-top: 50px;
 }
 
-/* Estilos para cada tarjeta de imagen */
+/* Styles for each image card */
 .image-card {
     width: 100%;
     border: 1px solid #ddd;
@@ -48,10 +41,10 @@ footer {
     padding: 20px;
     text-align: center;
     background-color: #fff;
-    box-shadow: 0 4px 6px rgba(84, 73, 73, 0.1);
+    box-shadow: 0 4px 6px rgba(73, 64, 105, 0.1);
 }
 
-/* Estilos para las imágenes */
+/* Styles for the images */
 .generated-image {
     width: 100%;
     display: block;
@@ -62,7 +55,7 @@ footer {
     object-fit: cover;
 }
 
-/* Estilos para los títulos */
+/* Styles for the titles */
 h3 {
     margin: 10px 0;
     font-size: 18px;
