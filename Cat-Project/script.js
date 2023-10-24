@@ -100,9 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 breedSelect.appendChild(option);
             });
 
-            // Specify the default breed ID here, e.g., "ragd"
-            const defaultBreedId = "ragd"; // Cambia esto a la raza que desees mostrar por defecto
-            loadCatImages(defaultBreedId); // Carga imágenes de la raza predeterminada
+            // Specify the default breed 
+            const defaultBreedId = "ragd"; 
+            loadCatImages(defaultBreedId); 
         })
         .catch((error) => {
             console.error("Error fetching cat breeds: " + error.message);
