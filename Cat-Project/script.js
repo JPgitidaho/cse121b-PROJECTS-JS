@@ -1,7 +1,7 @@
 // Array to store cat breeds
 const catBreeds = [];
 
-// Function to load cat images with a default breed ID
+// Function to load cat images and description with a breed ID
 function loadCatImages(breedId) {
     const apiUrl = `https://api.thecatapi.com/v1/images/search?limit=6&breed_id=${breedId}`;
 
@@ -10,6 +10,13 @@ function loadCatImages(breedId) {
         .then(async (data) => {
             const imageContainer = document.getElementById("image-container");
             imageContainer.innerHTML = "";
+
+            // Get information about the corresponding breed from the catBreeds array
+            const selectedBreed = catBreeds.find((breed) => breed.id === breedId);
+
+            // Update the description for the selected breed
+            const breedDescription = document.getElementById("breedDescription");
+            breedDescription.textContent = selectedBreed.description;
 
             // Function to generate stars based on the level of a trait
             function generateStars(level) {
@@ -22,9 +29,6 @@ function loadCatImages(breedId) {
             for (let index = 0; index < data.length; index++) {
                 const catImage = data[index];
                 const imageUrl = catImage.url;
-
-                // Get information about the corresponding breed from the catBreeds array
-                const selectedBreed = catBreeds.find((breed) => breed.id === breedId);
 
                 // Create an HTML card for the image with stars
                 const card = document.createElement("div");
@@ -89,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             // Specify the default breed ID here, e.g., "ragd"
-            const defaultBreedId = "ragd";
+            const defaultBreedId = "null";
             loadCatImages(defaultBreedId); // Load images of the default breed
         })
         .catch((error) => {
