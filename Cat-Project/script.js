@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             // Specify the default breed ID here, e.g., "ragd"
-            const defaultBreedId = "ragd";
+            const defaultBreedId = "null";
             loadCatImages(defaultBreedId); // Load images of the default breed
         })
         .catch((error) => {

@@ -61,3 +61,23 @@ h3 {
     font-size: 18px;
     font-weight: bold;
 }
+/* Estilos para los botones de filtros */
+.filter-button {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none;
+    padding: 10px 20px; /* Espaciado interno */
+    margin: 5px; /* Espaciado exterior */
+    cursor: pointer;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo cuando el cursor está sobre el botón */
+.filter-button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo cuando se presiona el botón */
+.filter-button:active {
+    background-color: #3e8948;
+}
