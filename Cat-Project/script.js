@@ -1,4 +1,7 @@
-// Function to load cat images
+// Array to store cat breeds
+const catBreeds = [];
+
+// Function to load cat images with a default breed ID
 function loadCatImages(breedId) {
     const apiUrl = `https://api.thecatapi.com/v1/images/search?limit=6&breed_id=${breedId}`;
 
@@ -20,8 +23,8 @@ function loadCatImages(breedId) {
                 const catImage = data[index];
                 const imageUrl = catImage.url;
 
-                // Get information about the corresponding breed
-                const breedInfo = await fetch(`https://api.thecatapi.com/v1/breeds/${breedId}`).then(response => response.json());
+                // Get information about the corresponding breed from the catBreeds array
+                const selectedBreed = catBreeds.find((breed) => breed.id === breedId);
 
                 // Create an HTML card for the image with stars
                 const card = document.createElement("div");
@@ -35,15 +38,15 @@ function loadCatImages(breedId) {
                 const title = document.createElement("h3");
 
                 // Build star strings for each trait
-                const adaptabilityStars = generateStars(breedInfo.adaptability);
-                const affectionStars = generateStars(breedInfo.affection_level);
-                const childFriendlyStars = generateStars(breedInfo.child_friendly);
-                const dogFriendlyStars = generateStars(breedInfo.dog_friendly);
-                const energyStars = generateStars(breedInfo.energy_level);
-                const groomingStars = generateStars(breedInfo.grooming);
-                const healthIssuesStars = generateStars(breedInfo.health_issues);
-                const intelligenceStars = generateStars(breedInfo.intelligence);
-                const sheddingStars = generateStars(breedInfo.shedding_level);
+                const adaptabilityStars = generateStars(selectedBreed.adaptability);
+                const affectionStars = generateStars(selectedBreed.affection_level);
+                const childFriendlyStars = generateStars(selectedBreed.child_friendly);
+                const dogFriendlyStars = generateStars(selectedBreed.dog_friendly);
+                const energyStars = generateStars(selectedBreed.energy_level);
+                const groomingStars = generateStars(selectedBreed.grooming);
+                const healthIssuesStars = generateStars(selectedBreed.health_issues);
+                const intelligenceStars = generateStars(selectedBreed.intelligence);
+                const sheddingStars = generateStars(selectedBreed.shedding_level);
 
                 title.innerHTML = `<br>
                 Adaptability: ${adaptabilityStars}<br>
@@ -55,7 +58,7 @@ function loadCatImages(breedId) {
                 Health Issues: ${healthIssuesStars}<br>
                 Intelligence: ${intelligenceStars}<br>
                 Shedding: ${sheddingStars}<br>
-                Origin: ${breedInfo.origin}`;
+                Origin: ${selectedBreed.origin}`;
 
                 card.appendChild(image);
                 card.appendChild(title);
@@ -67,7 +70,7 @@ function loadCatImages(breedId) {
         });
 }
 
-// Load the list of cat breeds when the page loads
+// Load the list of cat breeds and load images of a default breed when the page loads
 document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = "https://api.thecatapi.com/v1/breeds";
     const breedSelect = document.getElementById("breedSelect");
@@ -75,6 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
+            // Store the list of cat breeds in the catBreeds array
+            catBreeds.push(...data);
+
             data.forEach((breed) => {
                 const option = document.createElement("option");
                 option.value = breed.id;
@@ -82,9 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 breedSelect.appendChild(option);
             });
 
-            // Automatically load images of the first breed in the list
-            const selectedBreedId = "";
-            loadCatImages(selectedBreedId);
+            // Specify the default breed ID here, e.g., "ragd"
+            const defaultBreedId = "ragd";
+            loadCatImages(defaultBreedId); // Load images of the default breed
         })
         .catch((error) => {
             console.error("Error fetching cat breeds: " + error.message);
