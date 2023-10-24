@@ -60,11 +60,6 @@ function loadCatImages(breedId) {
                 Shedding: ${sheddingStars}<br>
                 Origin: ${selectedBreed.origin}`;
 
-                // Display additional data (size and affection) in the card
-                const size = selectedBreed.size;
-                const affection = selectedBreed.affection;
-                title.innerHTML += `<br>Size: ${size}<br>Affection: ${affection}`;
-
                 card.appendChild(image);
                 card.appendChild(title);
                 imageContainer.appendChild(card);
@@ -93,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 breedSelect.appendChild(option);
             });
 
-            // Specify the default breed ID here
-            const defaultBreedId = "ycho";
+            // Specify the default breed ID here, e.g., "ragd"
+            const defaultBreedId = "ragd";
             loadCatImages(defaultBreedId); // Load images of the default breed
         })
         .catch((error) => {
