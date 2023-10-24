@@ -5,6 +5,14 @@ const catBreeds = [];
 function loadCatImages(breedId) {
     const apiUrl = `https://api.thecatapi.com/v1/images/search?limit=6&breed_id=${breedId}`;
 
+    // Borra el contenido existente en el imageContainer
+    const imageContainer = document.getElementById("image-container");
+    imageContainer.innerHTML = "";
+
+    // Restablece el contenido de la descripción
+    const breedDescription = document.getElementById("breedDescription");
+    breedDescription.textContent = "";
+
     fetch(apiUrl)
         .then((response) => response.json())
         .then(async (data) => {
@@ -93,8 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             // Specify the default breed ID here, e.g., "ragd"
-            const defaultBreedId = "null";
-            loadCatImages(defaultBreedId); // Load images of the default breed
+            const defaultBreedId = "ragd"; // Cambia esto a la raza que desees mostrar por defecto
+            loadCatImages(defaultBreedId); // Carga imágenes de la raza predeterminada
         })
         .catch((error) => {
             console.error("Error fetching cat breeds: " + error.message);
@@ -106,3 +114,8 @@ document.getElementById("breedSelect").addEventListener("change", () => {
     const selectedBreedId = document.getElementById("breedSelect").value;
     loadCatImages(selectedBreedId);
 });
+
+
+
+
+
