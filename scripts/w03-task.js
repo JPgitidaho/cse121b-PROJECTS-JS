@@ -1,89 +1,122 @@
-/* LESSON 3 - Programming Tasks */
+/* Declare and initialize global variables */
+const templesElement = document.querySelector("#temples");
+let templeList = [];
 
-/* FUNCTIONS */
-/* Function Definition - Add Numbers */
-function add(number1, number2) {
-    return number1 + number2;
-  }
-  
-function addNumbers() {
-    let addNumber1 = Number(document.querySelector('#add1').value);
-    let addNumber2 = Number(document.querySelector('#add2').value);
-  
-    document.querySelector('#sum').value = add(addNumber1, addNumber2);
-  }
-  
+/* Function: displayTemples() */
+const displayTemples = (temples) => {
+  templesElement.innerHTML = ''; // Clear the temple container
 
-document.querySelector('#addNumbers').addEventListener('click', addNumbers);
+  temples.forEach((temple) => {
+    const article = document.createElement('article');
+    article.classList.add('temple-card');
 
+    // Create a div for the temple image and styling
+    const imageDiv = document.createElement('div');
+    imageDiv.classList.add('temple-image');
 
-/* Function Expression - Subtract Numbers */
+    const img = document.createElement('img');
+    img.src = temple.imageUrl;
+    img.alt = temple.location;
+    imageDiv.appendChild(img);
 
-const subtract = function(number1, number2) {
-    return number1 - number2;
-  };
-  
-const subtractNumbers = function() {
-    let subtractNumber1 = Number(document.querySelector('#subtract1').value);
-    let subtractNumber2 = Number(document.querySelector('#subtract2').value);
-    document.querySelector('#difference').value = subtract(subtractNumber1, subtractNumber2);
+    article.appendChild(imageDiv);
 
-  };
+    // Create a div for temple information
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('temple-info');
 
-document.querySelector('#subtractNumbers').addEventListener('click', subtractNumbers);
-  
-/* Arrow Function - Multiply Numbers */
-const multiply = (number1, number2) => number1 * number2;
+    const h3 = document.createElement('h3');
+    h3.innerText = temple.templeName;
+    h3.style.fontWeight = 'bold'; // Make templeName bold
+    h3.style.fontSize = '20px'; // Increase font size for templeName
+    infoDiv.appendChild(h3);
 
-const multiplyNumbers = () => {
-  const factor1 = Number(document.querySelector('#factor1').value);
-  const factor2 = Number(document.querySelector('#factor2').value);
-  const product = multiply(factor1, factor2);
-  document.querySelector('#product').value = product;
+    const locationP = document.createElement('p');
+    locationP.innerText = "Location: " + temple.location;
+    infoDiv.appendChild(locationP);
+
+    const dedicatedP = document.createElement('p');
+    dedicatedP.innerText = "Dedicated: " + temple.dedicated;
+    infoDiv.appendChild(dedicatedP);
+
+    const areaP = document.createElement('p');
+    areaP.innerText = "Area: " + temple.area + " square feet";
+    infoDiv.appendChild(areaP);
+
+    article.appendChild(infoDiv);
+
+    templesElement.appendChild(article);
+  });
 };
 
-document.querySelector('#multiplyNumbers').addEventListener('click', multiplyNumbers);
 
-  /* Open Function Use - Divide Numbers */
-function divide(number1, number2) {
-    if (number2 === 0) {
-      return "Cannot divide by zero";
+
+/* Function: getTemples() */
+const getTemples = async () => {
+  try {
+    const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
+    templeList = await response.json();
+    if (response.ok) {
+      displayTemples(templeList);
+    } else {
+      console.log("DATA COULD NOT BE FETCHED");
     }
-    return number1 / number2;
+    console.log("TEMPLE DATA:", templeList);
+  } catch (error) {
+    console.error("Error fetching temple data:", error);
   }
-  
-  const divideNumbers = function () {
-    const dividend = Number(document.querySelector('#dividend').value);
-    const divisor = Number(document.querySelector('#divisor').value);
-    const quotient = divide(dividend, divisor);
-    document.querySelector('#quotient').value = quotient;
-  };
-  
-  document.querySelector('#divideNumbers').addEventListener('click', divideNumbers);
-  
-/* Decision Structure */
-const currentDate = new Date();
-const currentYear = currentDate.getFullYear();
-document.querySelector('#year').innerHTML = currentYear;
+};
+
+/* Function: reset() */
+const reset = () => {
+  templesElement.innerHTML = ''; // Clear the temple container
+};
+
+/* Function: sortBy() */
+const sortBy = (temples) => {
+  reset();
+  const filterValue = document.getElementById('sortBy').value;
+
+  switch (filterValue) {
+    case 'utah':
+      displayTemples(temples.filter((temple) => temple.location.includes("Utah")));
+      break;
+    case 'notutah':
+      displayTemples(temples.filter((temple) => !temple.location.includes("Utah")));
+      break;
+    case 'older':
+      displayTemples(temples.filter((temple) => new Date(temple.dedicated) < new Date(1950, 0, 1)));
+      break;
+    case 'alphabetical':
+      displayTemples(temples.slice().sort((a, b) => a.templeName.localeCompare(b.templeName)));
+      break;
+    case 'all':
+    default:
+      displayTemples(temples);
+      break;
+  }
+}
 
 
-/* ARRAY METHODS - Functional Programming */
-let numbersArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-/* Output Source Array */
-document.querySelector('#array').innerHTML = numbersArray.join(', ');
-/* Output Odds Only Array */
-const oddNumbers = numbersArray.filter(number => number % 2 === 1);
-document.querySelector('#odds').innerHTML = oddNumbers.join(', ');
-/* Output Evens Only Array */
-const evenNumbers = numbersArray.filter(number => number % 2 === 0);
-document.querySelector('#evens').innerHTML = evenNumbers.join(', ');
+/* Event Listener for the Sort By dropdown */
+document.getElementById("sortBy").addEventListener("change", () => {
+  sortBy(templeList);
+});
 
-/* Output Sum of Org. Array */
-const sumOfArray = numbersArray.reduce((sum, number) => sum + number, 0);
-document.querySelector('#sumOfArray').innerHTML = sumOfArray;
-/* Output Multiplied by 2 Array */
-const multipliedArray = numbersArray.map(number => number * 2);
-document.querySelector('#multiplied').innerHTML = multipliedArray.join(', ');
-/* Output Sum of Multiplied by 2 Array */
-const sumOfMultiplied = multipliedArray.reduce((sum, number) => sum + number, 0);
-document.querySelector('#sumOfMultiplied').innerHTML = sumOfMultiplied;
+/* Initialize by fetching temple data */
+getTemples();
+
+/* Function to add the "Alphabetical Order" option */
+function addAlphabeticalOption() {
+  const sortBySelect = document.getElementById('sortBy');
+
+  const alphabeticalOption = document.createElement('option');
+  alphabeticalOption.value = 'alphabetical';
+  alphabeticalOption.textContent = 'Alphabetical Order';
+
+  // Insert the option as the last item in the dropdown
+  sortBySelect.appendChild(alphabeticalOption);
+}
+
+// Call the function to add the "Alphabetical Order" option
+addAlphabeticalOption();
