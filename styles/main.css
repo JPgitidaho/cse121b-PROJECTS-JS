@@ -117,10 +117,6 @@ footer {
     bottom: 0;
 }
 
-/* Class Selectors */
-.active {
-    border-bottom: 1px solid yellow;
-}
 
 .open li {
     display: block;

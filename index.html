@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me | CSE 121b | W02: Programming Tasks</title>
+  <title>CSE 121b | W04: Programming Tasks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"
@@ -19,26 +19,32 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="w02-task.html">W2 Task</a></li>
       <li><a href="w03-task.html" class="active">W3 Task</a></li>
-
+    
     </ul>
   </nav>
   <main id="home">
     <picture>
-      <img src="images/placeholder.png" alt="Placeholder Image">
+      <img id="photo" src="images/placeholder.png" alt="Placeholder Image">
     </picture>
     <section>
-      <h1>About Me</h1>
-      <div class="info">Name: <span id="name"></span></div>
-      <h2>Favorite Food</h2>
-      <div class="block" id="food"></div>
+      <h1>About Me<br>• &nbsp;<span id="name"></span>&nbsp; •</h1>
+      <h2>Favorite Foods</h2>
+      <ul id="favorite-foods"></ul>
+      <h2>Hobbies</h2>
+      <ul id="hobbies"></ul>
+      <h2>Places Lived</h2>
+      <dl id="places-lived"></dl>
     </section>
   </main>
+
   <footer>
-    &copy;<span id="year"></span> | About Me | CSE 121b
+    &copy;<span id="year"></span> | Week 04 - Biography | CSE 121b
   </footer>
   <script src="scripts/main.js"></script>
+  <script>
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+  </script>
   <script src="scripts/w01-task.js"></script>
-
 </body>
 
 </html>
